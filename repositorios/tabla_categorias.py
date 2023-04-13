@@ -13,3 +13,14 @@ def cargar():
 
     return categorias
 
+
+def busca_por_nombre(nombre=''):
+    with open(normpath(expanduser(constantes.rutas.TABLA_CATEGORIAS)),'r') as ar:
+        for l in ar.readlines():
+            if len(l.split(':'))>1 and l.split(':')[1].rstrip() == nombre:
+                categoria=modelos.categorias.Categoria(codigo=l.zfill(long_campos.CATEGORIA),nombre=nombre)
+                return categoria
+    categoria=modelos.categorias.Categoria(codigo='',nombre='')
+    return categoria
+
+        #categoria=modelos.categorias.Categoria(codigo=([l.rstrip() for l in ar.readlines() if len(l.split(':'))>1 and l.split(':')[1].rstrip() == nombre][0:1] or ('',))[0],nombre=nombre)
