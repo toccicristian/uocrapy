@@ -25,3 +25,33 @@ def escribir(trabajadores_list):
         ar.write(json.dumps(lista_dict))
     return None
 
+
+def crear(trabajador=modelos.trabajadores.Trabajador):
+    lista_dict_trabajadores=list()
+    if isfile(normpath(expanduser(constantes.rutas.BD_TRABAJADORES))):
+        with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'r') as ar:
+            lista_dict_trabajadores=json.loads(ar.read())
+    for t_dict in lista_dict_trabajadores:
+        t=modelos.trabajadores.Trabajador()
+        t.__dict__=t_dict
+        if trabajador.cuil == t.cuil and trabajador.cuit_empleador == t.cuit_empleador:
+            return None
+    lista_dict_trabajadores.append(trabajador.__dict__)
+    with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'w') as ar:
+        ar.write(json.dumps(lista_dict_trabajadores))
+    return None
+
+
+def borrar(trabajador=modelos.trabajadores.Trabajador):
+    lista_dict_trabajadores_leidos=list()
+    lista_dict_trabajadores_resultantes=list()
+    if isfile(normpath(expanduser(constantes.rutas.BD_TRABAJADORES))):
+        with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'r') as ar:
+            lista_dict_trabajadores_leidos=json.loads(ar.read())
+    for t_dict in lista_dict_trabajadores_leidos:
+        if t_dict != trabajador.__dict__:
+            lista_dict_trabajadores_resultantes.append(t_dict)
+    if isfile(normpath(expanduser(constantes.rutas.BD_TRABAJADORES))):
+        with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'w') as ar:
+            ar.write(json.dumps(lista_dict_trabajadores_resultantes))
+    return None
