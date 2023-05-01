@@ -1,10 +1,10 @@
 class Trabajador:
-    def __init__ (self, cuit_empleador='00000000000'cuil='00000000000', afiliado='N', rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica='N'):
+    def __init__ (self, cuit_empleador='00000000000',cuil='00000000000', afiliado='N', rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica='N'):
         self._cuit_empleador=cuit_empleador
         self._cuil=cuil
         self._afiliado=afiliado
         self._rem_cuota_sind=rem_cuota_sind
-        self._rem_cese_laboral=remuneracion_cese_laboral
+        self._rem_cese_laboral=rem_cese_laboral
         self._ingreso=ingreso
         self._codigo_postal=codigo_postal
         self._convenio=convenio
@@ -15,21 +15,24 @@ class Trabajador:
     def cuit_empleador (self):
         return self._cuit_empleador
 
-    @cuit_empleador.setter(self, cuit_empleador):
+    @cuit_empleador.setter
+    def cuit_empleador (self, cuit_empleador=str()):
         self._cuit_empleador=cuit_empleador
 
     @property
     def cuil (self):
         return self._cuil
 
-    @cuil.setter(self, cuil=str()):
+    @cuil.setter
+    def cuil (self, cuil=str()):
         self._cuil=cuil
 
     @property
     def afiliado (self):
         return self._afiliado
 
-    @afiliado.setter(self, afiliado=str()):
+    @afiliado.setter
+    def afiliado (self, afiliado=str()):
         self._afiliado=afiliado
 
     @property
