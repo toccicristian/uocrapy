@@ -4,7 +4,9 @@
 import constantes.rutas
 import constantes.longitud_campos
 import modelos.trabajadores
+import modelos.empleadores
 import repositorios.bd_trabajadores
+import repositorios.bd_empleadores
 import repositorios.tabla_categorias
 import repositorios.tabla_convenios
 
@@ -48,6 +50,54 @@ def repositorios_bd_trabajadores_test():
       cant_trabajadores+=1
   print(f"Veces que ocurre el trabajador :{cant_trabajadores}")
 
+  print("=====================================================")
+
+
+def repositorios_bd_empleadores_test():
+  empleador_prueba = modelos.empleadores.Empleador (cuit = '20000000000', nombre = 'Nombre de Prueba')
+
+  print(f"Creando empleador {empleador_prueba.nombre} con cuit {empleador_prueba.cuit}... ")
+  repositorios.bd_empleadores.crear(empleador_prueba)
+
+  estado="ERROR"
+  print(f"Leyendo el empleador en la base de datos... ",end="")
+  for e in repositorios.bd_empleadores.leer():
+    if e.__dict__ == empleador_prueba.__dict__:
+      estado="OK"
+  print(f"[{estado}]")
+
+  estado="OK"
+  print(f"Borrando empleador {empleador_prueba.nombre} con cuit {empleador_prueba.cuit}... ")
+  repositorios.bd_empleadores.borrar(empleador_prueba)
+  print(f"Comprobando si fue eliminado de la base de datos... ",end="")
+  for e in repositorios.bd_empleadores.leer():
+    if e.__dict__ == empleador_prueba.__dict__:
+      estado="ERROR"
+  print(f"[{estado}]")
+
+  estado="ERROR"
+  print("Abriendo la base de datos...")
+  bd=repositorios.bd_empleadores.leer()
+  print("Añadiendo empleador a la lista...")
+  bd.append(empleador_prueba)
+  print("Actualizando la base de datos...")
+  repositorios.bd_empleadores.escribir(bd)
+  print("Comprobando si el cambio se realizó... ",end="")
+  for e in repositorios.bd_empleadores.leer():
+    if e.__dict__ == empleador_prueba.__dict__:
+      estado="OK"
+  print(f"[{estado}]")
+
+  estado='OK'
+  print("Eliminando de la base de datos... ",end="")
+  repositorios.bd_empleadores.borrar(empleador_prueba)
+  for e in repositorios.bd_empleadores.leer():
+    if e.__dict__ == empleador_prueba.__dict__:
+      estado="ERROR"
+  print(f"[{estado}]")
+
+  print("=====================================================")
 
 
 repositorios_bd_trabajadores_test()
+repositorios_bd_empleadores_test()
