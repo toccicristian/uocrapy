@@ -2,6 +2,7 @@ import constantes.rutas
 import constantes.longitud_campos
 import modelos.trabajadores
 from os.path import isfile, normpath, expanduser
+import os
 import json
 
 def leer():
@@ -18,6 +19,7 @@ def leer():
 
 
 def escribir(trabajadores_list):
+    os.makedirs(os.path.split(constantes.rutas.BD_TRABAJADORES)[0],exist_ok=True)
     with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'w') as ar:
         lista_dict=list()
         for t in trabajadores_list:
@@ -37,6 +39,7 @@ def crear(trabajador=modelos.trabajadores.Trabajador):
         if trabajador.cuil == t.cuil and trabajador.cuit_empleador == t.cuit_empleador:
             return None
     lista_dict_trabajadores.append(trabajador.__dict__)
+    os.makedirs(os.path.split(constantes.rutas.BD_TRABAJADORES)[0],exist_ok=True)
     with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'w') as ar:
         ar.write(json.dumps(lista_dict_trabajadores))
     return None
