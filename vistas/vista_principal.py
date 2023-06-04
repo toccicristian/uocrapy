@@ -28,22 +28,31 @@ def mostrar():
     b_empleado_agregar = tk.Button(f_empleados_botones, text="Agregar")
     # DETALLES DEFINICIONES
     f_detalles = tk.Frame(v)
-    campo_nombre = campos.Campo(f_detalles, texto_label="Nombre:", ancho_label=25, ancho_campo=40, pady=detalles_pady)
-    campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:", ancho_label=25, ancho_campo=13, pady=detalles_pady)
-    campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:", ancho_label=25, ancho_campo=1, pady=detalles_pady)
+
+    campo_nombre = campos.Campo(f_detalles, texto_label="Nombre:",
+                                ancho_label=25, ancho_campo=40, pady=detalles_pady)
+    campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:",
+                              ancho_label=25, ancho_campo=13, pady=detalles_pady)
+    campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:",
+                                  ancho_label=25, ancho_campo=1, pady=detalles_pady)
     campo_rem_cuota_sind = campos.Campo(f_detalles, texto_label="Remunerac. cuota sind.",
                                         ancho_label=25, ancho_campo=13, pady=detalles_pady)
     campo_rem_cese_laboral = campos.Campo(f_detalles, texto_label="Remunerac. cese laboral:",
                                           ancho_label=25, ancho_campo=13, pady=detalles_pady)
-    campo_ingreso = campos.Campo(f_detalles, texto_label="Ingreso:", ancho_label=25, ancho_campo=10, pady=detalles_pady)
+    campo_ingreso = campos.Campo(f_detalles, texto_label="Ingreso:",
+                                 ancho_label=25, ancho_campo=10, pady=detalles_pady)
     campo_codigo_postal = campos.Campo(f_detalles, texto_label="Codigo postal:",
                                        ancho_label=25, ancho_campo=4, pady=detalles_pady)
-    campo_convenio = campos.Campo(f_detalles, texto_label="Convenio:", ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:", ancho_label=25, ancho_campo=2, pady=detalles_pady)
+    campo_convenio = campos.Campo(f_detalles, texto_label="Convenio:",
+                                  ancho_label=25, ancho_campo=2, pady=detalles_pady)
+    campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:",
+                                   ancho_label=25, ancho_campo=2, pady=detalles_pady)
     campo_admin_publica = campos.Campo(f_detalles, texto_label="Admin. Publica:",
                                        ancho_label=25, ancho_campo=1, pady=detalles_pady)
+
     lista_campos=[campo_nombre, campo_cuil, campo_afiliado, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
                   campo_codigo_postal, campo_convenio, campo_categoria, campo_admin_publica]
+
     f_detalles_botones = tk.Frame(f_detalles)
     l_detalles_status = tk.Label(f_detalles_botones, text="", width=20, anchor=tk.W)
     b_detalles_guardar = tk.Button(f_detalles_botones, text="Guardar cambios")
@@ -78,7 +87,10 @@ def mostrar():
     f_exportacion.pack(side=tk.RIGHT, anchor=tk.S, padx=(0,25), pady=(0,25))
     l_exportacion.pack(side=tk.LEFT, padx=(0,25))
     b_exportacion.pack(side=tk.RIGHT)
-    #b_exportacion.pack(side=tk.RIGHT, anchor=tk.S, padx=(0,25), pady=(0,25))
+
+    # BINDEOS
+    v.bind('<Escape>', lambda event: v.destroy())
+
 
     v.mainloop()
 
