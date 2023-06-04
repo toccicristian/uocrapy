@@ -28,7 +28,6 @@ def mostrar():
     b_empleado_agregar = tk.Button(f_empleados_botones, text="Agregar")
     # DETALLES DEFINICIONES
     f_detalles = tk.Frame(v)
-
     campo_nombre = campos.Campo(f_detalles, texto_label="Nombre:", ancho_label=25, ancho_campo=40, pady=detalles_pady)
     campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:", ancho_label=25, ancho_campo=13, pady=detalles_pady)
     campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:", ancho_label=25, ancho_campo=1, pady=detalles_pady)
@@ -43,6 +42,8 @@ def mostrar():
     campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:", ancho_label=25, ancho_campo=2, pady=detalles_pady)
     campo_admin_publica = campos.Campo(f_detalles, texto_label="Admin. Publica:",
                                        ancho_label=25, ancho_campo=1, pady=detalles_pady)
+    lista_campos=[campo_nombre, campo_cuil, campo_afiliado, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
+                  campo_codigo_postal, campo_convenio, campo_categoria, campo_admin_publica]
     f_detalles_botones = tk.Frame(f_detalles)
     l_detalles_status = tk.Label(f_detalles_botones, text="", width=20, anchor=tk.W)
     b_detalles_guardar = tk.Button(f_detalles_botones, text="Guardar cambios")
@@ -67,16 +68,8 @@ def mostrar():
     b_empleado_agregar.pack(side=tk.LEFT)
     # DETALLES PACK
     f_detalles.pack(side=tk.TOP, padx=(40,10),pady=(50,10))
-    campo_nombre.pack()
-    campo_cuil.pack()
-    campo_afiliado.pack()
-    campo_rem_cuota_sind.pack()
-    campo_rem_cese_laboral.pack()
-    campo_ingreso.pack()
-    campo_codigo_postal.pack()
-    campo_convenio.pack()
-    campo_categoria.pack()
-    campo_admin_publica.pack()
+    for campo in lista_campos:
+        campo.pack()
 
     f_detalles_botones.pack(side=tk.TOP, pady=(40,20))
     l_detalles_status.pack(side=tk.LEFT, anchor=tk.W)
