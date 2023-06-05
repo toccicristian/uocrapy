@@ -9,7 +9,7 @@ import repositorios.bd_trabajadores
 import repositorios.bd_empleadores
 import repositorios.tabla_categorias
 import repositorios.tabla_convenios
-
+import vistas.vista_principal
 
 def repositorios_bd_trabajadores_test():
   t_nuevo = modelos.trabajadores.Trabajador()
@@ -99,5 +99,10 @@ def repositorios_bd_empleadores_test():
   print("=====================================================")
 
 
+def vista_principal_test():
+    vistas.vista_principal.mostrar()
+
 repositorios_bd_trabajadores_test()
 repositorios_bd_empleadores_test()
+vista_principal_test()
+
