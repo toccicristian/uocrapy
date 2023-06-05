@@ -1,5 +1,5 @@
 class Trabajador:
-    def __init__ (self, cuit_empleador='00000000000',cuil='00000000000', afiliado='N', rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica='N'):
+    def __init__ (self, cuit_empleador='00000000000',cuil='00000000000', afiliado=False, rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica=False, exportar=False):
         self._cuit_empleador=cuit_empleador
         self._cuil=cuil
         self._afiliado=afiliado
@@ -10,6 +10,7 @@ class Trabajador:
         self._convenio=convenio
         self._categoria=categoria
         self._administracion_publica=administracion_publica
+        self._exportar=exportar
 
     @property
     def cuit_empleador (self):
@@ -32,7 +33,7 @@ class Trabajador:
         return self._afiliado
 
     @afiliado.setter
-    def afiliado (self, afiliado=str()):
+    def afiliado (self, afiliado=True):
         self._afiliado=afiliado
 
     @property
@@ -88,5 +89,13 @@ class Trabajador:
         return self._administracion_publica
 
     @administracion_publica.setter
-    def administracion_publica (self, administracion_publica=str()):
+    def administracion_publica (self, administracion_publica=True):
         self._administracion_publica=administracion_publica
+
+    @property
+    def exportar(self):
+        return self._exportar
+
+    @exportar.setter
+    def exportar (self, exportar=True):
+        self._exportar=exportar
