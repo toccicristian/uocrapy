@@ -28,8 +28,9 @@ def quitar(lista_campos, tview_empleador):
     return None
 
 
-def selecciona_empleador(lista_campos, tview_empleados):
+def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion):
     for campo in lista_campos:
         campo.enable()
+    l_exportacion.config(text=f"Exportando para :{tview_empleadores.item(tview_empleadores.focus())['values'][0]}")
     return None
 

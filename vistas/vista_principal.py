@@ -82,7 +82,7 @@ def mostrar():
     l_detalles_status = tk.Label(f_detalles_botones, text="", width=20, anchor=tk.W)
     b_detalles_guardar = tk.Button(f_detalles_botones, text="Guardar cambios")
     f_exportacion = tk.Frame(v)
-    l_exportacion = tk.Label(f_exportacion, text="Exportando para:", width=48, anchor=tk.W)
+    l_exportacion = tk.Label(f_exportacion, text="", width=48, anchor=tk.W)
     b_exportacion = tk.Button(f_exportacion, text="Exportar a UOCRA...")
     # PACKS
     f_personas.pack(side=tk.LEFT, padx=(20,10))
@@ -118,7 +118,7 @@ def mostrar():
     b_empleador_agregar.configure(command = lambda : empleador.agregar(v, tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
-                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados))
+                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))
 
     empleador.actualiza_tview(tview_empleadores)
     v.mainloop()
