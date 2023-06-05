@@ -16,8 +16,14 @@ class Campo:
         self._label=tk.Label(self._frame, text=self._texto_label, width=self._ancho_label, anchor=tk.W)
         self._text=tk.Text(self._frame, height=1, width=self._ancho_campo)
 
+    @property
+    def text(self):
+        return self._text.get("1.0","end-1c")
 
     def pack(self):
         self._frame.pack(side=self._packside, anchor=self._packanchor, padx=self._padx, pady=self._pady)
         self._label.pack(side=tk.LEFT)
         self._text.pack(side=tk.LEFT)
+
+    def focus_set(self):
+        self._text.focus_set()
