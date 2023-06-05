@@ -30,7 +30,8 @@ def mostrar():
     scrollb_empleadores.config(command=tview_empleadores.yview)
 
     f_empleador_botones = tk.Frame(f_empleadores)
-    b_empleador_quitar = tk.Button(f_empleador_botones, text="Quitar")
+    b_empleador_quitar = tk.Button(f_empleador_botones, text="Quitar",
+                                   command = lambda : empleador.quitar(tview_empleadores))
     b_empleador_agregar = tk.Button(f_empleador_botones, text="Agregar",
                                     command = lambda : empleador.agregar(v, tview_empleadores))
     # EMPLEADOS DEFINICIONES
@@ -102,6 +103,7 @@ def mostrar():
     # DETALLES PACK
     f_detalles.pack(side=tk.TOP, padx=(35,10),pady=(63,10))
     for campo in lista_campos:
+        campo.disable()
         campo.pack()
 
     f_detalles_botones.pack(side=tk.TOP, pady=(40,20))
@@ -115,6 +117,6 @@ def mostrar():
     # BINDEOS
     v.bind('<Escape>', lambda event: v.destroy())
 
-
+    empleador.actualiza_tview(tview_empleadores)
     v.mainloop()
 

@@ -1,5 +1,7 @@
 import repositorios.bd_empleadores
 import modelos.empleadores
+import modelos.v_mensaje
+import utiles.cuit
 
 
 def actualiza_tview(tview):
@@ -11,8 +13,15 @@ def actualiza_tview(tview):
 
 
 def agregar(v, tview_empleadores, nombre, cuit):
+    if utiles.cuit.digitver(str(cuit)[:-1]) != str(cuit)[-1]:
+        modelos.v_mensaje.Mensaje(
+            v, f"El numero ingresado NO es un CUIT.\nDV calculado: {utiles.cuit.digitver(str(cuit)[:-1])}"
+        )
+        return False
+
     for empleador in repositorios.bd_empleadores.leer():
-        if empleador.cuit == cuit:
+        if str(empleador.cuit) == str(cuit):
+            modelos.v_mensaje.Mensaje(v,"El CUIT ya existe en Base de Datos")
             return False
 
     empleador=modelos.empleadores.Empleador(cuit=cuit, nombre=nombre)
