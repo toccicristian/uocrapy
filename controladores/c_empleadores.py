@@ -13,6 +13,18 @@ def actualiza_tview(tview):
 
 
 def agregar(v, tview_empleadores, nombre, cuit):
+    if len(cuit)!=11:
+        modelos.v_mensaje.Mensaje(
+            v, f"El numero es muy { 'corto' if len(cuit)<11 else 'largo'} ({len(cuit)} caracteres)"
+        )
+        return False
+
+    if not str(cuit[0:2]) in ['20','23','24','27','30','33','34']:
+        modelos.v_mensaje.Mensaje(
+            v, f"El tipo de cuit es inválido."
+        )
+        return False
+
     if utiles.cuit.digitver(str(cuit)[:-1]) != str(cuit)[-1]:
         modelos.v_mensaje.Mensaje(
             v, f"El numero ingresado NO es un CUIT.\nDV calculado: {utiles.cuit.digitver(str(cuit)[:-1])}"

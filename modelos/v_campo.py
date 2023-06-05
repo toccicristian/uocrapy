@@ -33,7 +33,7 @@ class Campo:
         self._entry.bind(secuencia, funcion)
 
     def disable(self):
-        self._entry.config(state=tk.DISABLED)
+        self._entry.configure(state=tk.DISABLED)
 
     def enable(self):
-        self._entry.config(state=tk.NORMAL)
+        self._entry.configure(state=tk.NORMAL)
