@@ -15,7 +15,6 @@ class Campo:
         self._frame=tk.Frame(self._master)
         self._label=tk.Label(self._frame, text=self._texto_label, width=self._ancho_label, anchor=tk.W)
         self._entry = tk.Entry(self._frame, width=self._ancho_campo)
-        #self._text=tk.Text(self._frame, height=1, width=self._ancho_campo)
 
     @property
     def text(self):

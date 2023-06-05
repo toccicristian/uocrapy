@@ -58,3 +58,19 @@ def borrar(trabajador=modelos.trabajadores.Trabajador):
         with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'w') as ar:
             ar.write(json.dumps(lista_dict_trabajadores_resultantes))
     return None
+
+
+def busca_por_cuit_de_empleador(cuit_empleador):
+    trabajadores_list=list()
+    resultados=list()
+    if not isfile(normpath(expanduser(constantes.rutas.BD_TRABAJADORES))):
+        return trabajadores_list
+    with open(normpath(expanduser(constantes.rutas.BD_TRABAJADORES)),'r') as ar:
+        lista_dict_trabajadores=json.loads(ar.read())
+
+    for t_dict in lista_dict_trabajadores:
+        trabajador=modelos.trabajadores.Trabajador()
+        trabajador.__dict__=t_dict
+        if(str(trabajador.cuit_empleador) == str(cuit_empleador)):
+            resultados.append(trabajador)
+    return resultados

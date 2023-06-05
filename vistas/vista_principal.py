@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import modelos.v_campo as campos
+import modelos.v_checkbox as checkbox
 import controladores.c_principal_empleador as empleador
 
 def mostrar():
@@ -57,9 +58,6 @@ def mostrar():
                                 ancho_label=25, ancho_campo=40, pady=detalles_pady)
     campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:",
                               ancho_label=25, ancho_campo=13, pady=detalles_pady)
-    # TODO : CONVERTIR campo_afiliado A CHECKBOX. ATRIBUTO BOOLEANO.
-    campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:",
-                                  ancho_label=25, ancho_campo=1, pady=detalles_pady)
     campo_rem_cuota_sind = campos.Campo(f_detalles, texto_label="Remunerac. cuota sind.",
                                         ancho_label=25, ancho_campo=13, pady=detalles_pady)
     campo_rem_cese_laboral = campos.Campo(f_detalles, texto_label="Remunerac. cese laboral:",
@@ -72,13 +70,13 @@ def mostrar():
                                   ancho_label=25, ancho_campo=2, pady=detalles_pady)
     campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:",
                                    ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    # TODO : CONVERTIR campo_admin_publica A CHECKBOX. ATRIBUTO BOOLEANO.
-    campo_admin_publica = campos.Campo(f_detalles, texto_label="Admin. Publica:",
-                                       ancho_label=25, ancho_campo=1, pady=detalles_pady)
-    # TODO : CREAR CHECKBOX DE EXPORTAR, Y AGREGARLO A lista_campos
+    check_afiliado = checkbox.Checkbox(f_detalles, text="Afiliado",pady=detalles_pady)
+    check_admin_publica = checkbox.Checkbox(f_detalles, text="Admin. Publica",pady=detalles_pady)
+    check_exportar = checkbox.Checkbox(f_detalles, text="EXPORTAR", padx=(0,20), pady=detalles_pady*2, packanchor=tk.E)
 
-    lista_campos=[campo_nombre, campo_cuil, campo_afiliado, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
-                  campo_codigo_postal, campo_convenio, campo_categoria, campo_admin_publica]
+    lista_campos=[campo_nombre, campo_cuil, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
+                  campo_codigo_postal, campo_convenio, campo_categoria, check_afiliado, check_admin_publica,
+                  check_exportar]
 
     f_detalles_botones = tk.Frame(f_detalles)
     l_detalles_status = tk.Label(f_detalles_botones, text="", width=20, anchor=tk.W)
