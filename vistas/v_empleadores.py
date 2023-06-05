@@ -15,9 +15,14 @@ def mostrar(toplevel, tview_empleador, width="600", height="150"):
     b_aceptar=tk.Button(f_botones, text="Aceptar",
                         command = lambda : controladores.c_empleadores.agregar(
                             v, tview_empleador, campo_nombre.text, campo_cuit.text))
-
     #BINDEOS
     v.bind("<Escape>", lambda event: v.destroy())
+
+    b_aceptar.bind("<Return>", lambda event: controladores.c_empleadores.agregar(
+                            v, tview_empleador, campo_nombre.text, campo_cuit.text))
+
+    campo_cuit.bind("<Return>", lambda event: controladores.c_empleadores.agregar(
+                            v, tview_empleador, campo_nombre.text, campo_cuit.text))
 
     f_campos.pack(side=tk.TOP, padx=(10,10), pady=(10,0))
     campo_nombre.pack()

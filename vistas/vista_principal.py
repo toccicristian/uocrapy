@@ -31,8 +31,7 @@ def mostrar():
 
     f_empleador_botones = tk.Frame(f_empleadores)
     b_empleador_quitar = tk.Button(f_empleador_botones, text="Quitar")
-    b_empleador_agregar = tk.Button(f_empleador_botones, text="Agregar",
-                                    command = lambda : empleador.agregar(v, tview_empleadores))
+    b_empleador_agregar = tk.Button(f_empleador_botones, text="Agregar")
     # EMPLEADOS DEFINICIONES
     f_empleados = tk.Frame(f_personas)
     l_empleados = tk.Label(f_empleados, text="Empleados")
@@ -58,6 +57,7 @@ def mostrar():
                                 ancho_label=25, ancho_campo=40, pady=detalles_pady)
     campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:",
                               ancho_label=25, ancho_campo=13, pady=detalles_pady)
+    # TODO : CONVERTIR campo_afiliado A CHECKBOX. ATRIBUTO BOOLEANO.
     campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:",
                                   ancho_label=25, ancho_campo=1, pady=detalles_pady)
     campo_rem_cuota_sind = campos.Campo(f_detalles, texto_label="Remunerac. cuota sind.",
@@ -72,8 +72,10 @@ def mostrar():
                                   ancho_label=25, ancho_campo=2, pady=detalles_pady)
     campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:",
                                    ancho_label=25, ancho_campo=2, pady=detalles_pady)
+    # TODO : CONVERTIR campo_admin_publica A CHECKBOX. ATRIBUTO BOOLEANO.
     campo_admin_publica = campos.Campo(f_detalles, texto_label="Admin. Publica:",
                                        ancho_label=25, ancho_campo=1, pady=detalles_pady)
+    # TODO : CREAR CHECKBOX DE EXPORTAR, Y AGREGARLO A lista_campos
 
     lista_campos=[campo_nombre, campo_cuil, campo_afiliado, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
                   campo_codigo_postal, campo_convenio, campo_categoria, campo_admin_publica]
@@ -102,6 +104,7 @@ def mostrar():
     # DETALLES PACK
     f_detalles.pack(side=tk.TOP, padx=(35,10),pady=(63,10))
     for campo in lista_campos:
+        campo.disable()
         campo.pack()
 
     f_detalles_botones.pack(side=tk.TOP, pady=(40,20))
@@ -112,9 +115,13 @@ def mostrar():
     l_exportacion.pack(side=tk.LEFT, padx=(0,25))
     b_exportacion.pack(side=tk.RIGHT)
 
-    # BINDEOS
+    # BINDEOS Y COMANDOS
+    b_empleador_quitar.configure(command = lambda : empleador.quitar(lista_campos, tview_empleadores))
+    b_empleador_agregar.configure(command = lambda : empleador.agregar(v, tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
+    tview_empleadores.bind("<<TreeviewSelect>>",
+                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados))
 
-
+    empleador.actualiza_tview(tview_empleadores)
     v.mainloop()
 
