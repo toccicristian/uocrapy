@@ -16,6 +16,18 @@ def mostrar():
     f_empleadores = tk.Frame(f_personas)
     l_empleadores = tk.Label(f_empleadores, text="Empleadores")
     tview_empleadores = ttk.Treeview(f_empleadores, height=8)
+
+    tview_empleadores["columns"] = ("NOMBRE", "CUIT")
+    tview_empleadores.column("#0", width=0, stretch=tk.NO)
+    tview_empleadores.column("NOMBRE", anchor=tk.E, stretch=tk.YES, width="100")
+    tview_empleadores.column("CUIT", anchor=tk.E, stretch=tk.YES, width="100")
+    tview_empleadores.heading("#0", text="", anchor=tk.W)
+    tview_empleadores.heading("NOMBRE", text="NOMBRE", anchor=tk.W)
+    tview_empleadores.heading("CUIT", text="CUIT", anchor=tk.W)
+    scrollb_empleadores=tk.Scrollbar(f_empleadores, orient="vertical")
+    tview_empleadores.config(yscrollcommand=scrollb_empleadores.set)
+    scrollb_empleadores.config(command=tview_empleadores.yview)
+
     f_empleador_botones = tk.Frame(f_empleadores)
     b_empleador_quitar = tk.Button(f_empleador_botones, text="Quitar")
     b_empleador_agregar = tk.Button(f_empleador_botones, text="Agregar")
@@ -23,9 +35,20 @@ def mostrar():
     f_empleados = tk.Frame(f_personas)
     l_empleados = tk.Label(f_empleados, text="Empleados")
     tview_empleados = ttk.Treeview(f_empleados, height=8)
+
+    tview_empleados["columns"] = ("NOMBRE", "CUIT")
+    tview_empleados.column("#0", width=0, stretch=tk.NO)
+    tview_empleados.column("NOMBRE", anchor=tk.E, stretch=tk.YES, width="100")
+    tview_empleados.column("CUIT", anchor=tk.E, stretch=tk.YES, width="100")
+    tview_empleados.heading("#0", text="", anchor=tk.W)
+    tview_empleados.heading("NOMBRE", text="NOMBRE", anchor=tk.W)
+    tview_empleados.heading("CUIT", text="CUIT", anchor=tk.W)
+    scrollb_empleados=tk.Scrollbar(f_empleados, orient="vertical")
+    tview_empleados.config(yscrollcommand=scrollb_empleados.set)
+    scrollb_empleados.config(command=tview_empleados.yview)
+
     f_empleados_botones = tk.Frame(f_empleados)
     b_empleado_quitar = tk.Button(f_empleados_botones, text="Quitar")
-    b_empleado_agregar = tk.Button(f_empleados_botones, text="Agregar")
     # DETALLES DEFINICIONES
     f_detalles = tk.Frame(v)
 
@@ -74,7 +97,6 @@ def mostrar():
     tview_empleados.pack(side=tk.TOP)
     f_empleados_botones.pack(side=tk.TOP)
     b_empleado_quitar.pack(side=tk.LEFT)
-    b_empleado_agregar.pack(side=tk.LEFT)
     # DETALLES PACK
     f_detalles.pack(side=tk.TOP, padx=(40,10),pady=(50,10))
     for campo in lista_campos:
