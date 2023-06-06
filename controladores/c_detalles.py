@@ -7,15 +7,16 @@ import controladores.c_convenio as c_convenio
 import modelos.trabajadores
 import modelos.v_mensaje
 import utiles.cuit
+import utiles.fechas
 
-def busca_campo(lista_campos, nombre_campo=str()):
+def busca_campo(lista_campos, nombre=str()):
     for campo in lista_campos:
-        if f'{campo.nombre}' == f'{nombre_campo}':
+        if f'{campo.nombre}' == f'{nombre}':
             return campo
 
 
 def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
-    trabajador = modelos.trabajadores.Trabajador(nombre = busca_campo(lista_campos,"nombre").text,
+    trabajador = modelos.trabajadores.Trabajador(nombre = busca_campo(lista_campos,nombre="nombre").text,
                                                  cuit_empleador = tview_empleadores.item(tview_empleadores.focus())['values'][1],
                                                  cuil = busca_campo(lista_campos, nombre="cuil").text,
                                                  rem_cuota_sind = busca_campo(lista_campos, nombre="remcuota").text,
@@ -37,7 +38,7 @@ def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
     if not utiles.cuit.escuil(trabajador.cuil):
         errores+='El CUIL no es válido\n'
 
-    if not utiles.fechas.valida(trabajador.ingreso()):
+    if not utiles.fechas.valida(trabajador.ingreso):
         errores+='La fecha no es válida\n'
 
     if len(trabajador.codigo_postal)!=4:
@@ -53,9 +54,10 @@ def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
             repositorios.bd_trabajadores.borrar(t)
             repositorios.bd_trabajadores.crear(trabajador)
             controladores.c_trabajadores.actualiza_tview(tview_empleados)
-            modelos.v_mensaje.Mensaje(toplevel, f"Se actualizó el trabajador {trabajador.nombre}")
+            modelos.v_mensaje.Mensaje(v, f"Se actualizó el trabajador {trabajador.nombre}")
             return True
 
     repositorios.bd_trabajadores.crear(trabajador)
     controladores.c_trabajadores.actualiza_tview(tview_empleados)
-    modelos.v_mensaje.Mensaje(toplevel, f"Se creó el trabajador {trabajador.nombre}")
+    modelos.v_mensaje.Mensaje(v, f"Se creó el trabajador {trabajador.nombre}")
+    return True

@@ -23,6 +23,6 @@ def es_dia(aaaammdd=str()):
 
 
 def valida(fecha=str()):
-    if len(fecha)!=8 or fecha[4:6]>12 or fecha[4:6]<1 or not es_dia(aaaammdd):
+    if len(fecha)!=8 or int(fecha[4:6])>12 or int(fecha[4:6])<1 or not es_dia(fecha):
         return False
     return True

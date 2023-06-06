@@ -17,7 +17,7 @@ class Checkbox:
 
     @property
     def tildada(self):
-        if self._var1.get() == 1:
+        if self._var.get() == 1:
             return True
         return False
 

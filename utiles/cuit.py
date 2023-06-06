@@ -11,5 +11,7 @@ def digitver(cuit_sin_dv=str()):
 
 
 def escuil(cuil=str()):
-    if len(cuil)!=11 or f'{cuil[0:2]}' not in ['20','23','24','27'] or f'{cuil[-1]}' != digitver(str(cuit)[:-1]):
+    if len(cuil)!=11 or f'{cuil[0:2]}' not in ['20','23','24','27'] or f'{cuil[-1]}' != digitver(str(cuil)[:-1]):
         return False
+    return True
+

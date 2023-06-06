@@ -4,8 +4,10 @@ import modelos.v_campo as campos
 import modelos.v_checkbox as checkbox
 import modelos.v_dropdown as dropdown
 import controladores.c_principal_empleador as empleador
+import controladores.c_principal_empleado as empleado
 import controladores.c_convenio as convenios
 import controladores.c_categoria as categorias
+import controladores.c_detalles as detalles
 
 def mostrar():
     v_min_w="800"
@@ -127,12 +129,17 @@ def mostrar():
     b_exportacion.pack(side=tk.RIGHT)
 
     # BINDEOS Y COMANDOS
-    b_empleador_quitar.configure(command = lambda : empleador.quitar(lista_campos, tview_empleadores,l_exportacion))
-    b_empleador_agregar.configure(command = lambda : empleador.agregar(v, tview_empleadores))
+    b_empleador_quitar.configure(command = lambda : empleador.quitar(
+        lista_campos, tview_empleadores,l_exportacion))
+    b_empleador_agregar.configure(command = lambda : empleador.agregar(
+        v, tview_empleadores))
+    b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
+        v, tview_empleadores,lista_campos, tview_empleados))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
                            lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))
 
     empleador.actualiza_tview(tview_empleadores)
+    empleado.actualiza_tview(tview_empleados)
     v.mainloop()
 
