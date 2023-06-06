@@ -14,14 +14,20 @@ def agregar(toplevel, tview_empleador):
     vistas.v_empleadores.mostrar(toplevel, tview_empleador)
 
 
-def quitar(lista_campos, tview_empleador):
+def quitar(lista_campos, tview_empleador, l_exportacion):
+    l_exportacion.config(text="")
+    if len(tview_empleador.item(tview_empleador.focus())['values']) == 0:
+        for campo in lista_campos:
+            campo.disable()
+        l_exportacion.config(text="")
+        return False
+
     repositorios.bd_empleadores.borrar(
         repositorios.bd_empleadores.busca_por_cuit(
             tview_empleador.item(tview_empleador.focus())["values"][1]
         )[0]
     )
     actualiza_tview(tview_empleador)
-    # TODO : AL DES-SELECCIONARSE LOS ELEMENTOS DEL TVIEW DE EMPLEADORES, NO SE DESHABILITAN LOS CAMPOS.
     if len(tview_empleador.selection()) == 0:
         for campo in lista_campos:
             campo.disable()
@@ -31,6 +37,12 @@ def quitar(lista_campos, tview_empleador):
 def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion):
     for campo in lista_campos:
         campo.enable()
+    if len(tview_empleadores.item(tview_empleadores.focus())['values']) == 0:
+        for campo in lista_campos:
+            campo.disable()
+        l_exportacion.config(text="")
+        return False
+
     l_exportacion.config(text=f"Exportando para :{tview_empleadores.item(tview_empleadores.focus())['values'][0]}")
     return None
 

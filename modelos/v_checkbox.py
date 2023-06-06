@@ -2,7 +2,7 @@ import tkinter as tk
 
 class Checkbox:
     def __init__ (self, toplevel, text=str(),
-                  packside=tk.TOP, packanchor=tk.W, padx=(0,0), pady=(0,0)):
+                  packside=tk.TOP, packanchor=tk.W, padx=(0,0), pady=(0,0), nombre=""):
         self._toplevel = toplevel
         self._text = text
         self._packside = packside
@@ -13,12 +13,17 @@ class Checkbox:
         self._var = tk.IntVar()
         self._checkbox = tk.Checkbutton(self._frame, text=self._text,
                                         variable=self._var, onvalue=1, offvalue=0)
+        self._nombre=nombre
 
     @property
     def tildada(self):
         if self._var1.get() == 1:
             return True
         return False
+
+    @property
+    def nombre(self):
+        return self._nombre
 
     def pack (self):
         self._frame.pack(side=self._packside, anchor=self._packanchor, padx=self._padx, pady=self._pady)

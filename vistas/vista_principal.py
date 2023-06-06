@@ -2,7 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 import modelos.v_campo as campos
 import modelos.v_checkbox as checkbox
+import modelos.v_dropdown as dropdown
 import controladores.c_principal_empleador as empleador
+import controladores.c_convenio as convenios
+import controladores.c_categoria as categorias
 
 def mostrar():
     v_min_w="800"
@@ -55,27 +58,37 @@ def mostrar():
     f_detalles = tk.Frame(v)
 
     campo_nombre = campos.Campo(f_detalles, texto_label="Nombre:",
-                                ancho_label=25, ancho_campo=40, pady=detalles_pady)
+                                ancho_label=25, ancho_campo=40, pady=detalles_pady, nombre="nombre")
     campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:",
-                              ancho_label=25, ancho_campo=13, pady=detalles_pady)
+                              ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="cuil")
     campo_rem_cuota_sind = campos.Campo(f_detalles, texto_label="Remunerac. cuota sind.",
-                                        ancho_label=25, ancho_campo=13, pady=detalles_pady)
+                                        ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="remcuota")
     campo_rem_cese_laboral = campos.Campo(f_detalles, texto_label="Remunerac. cese laboral:",
-                                          ancho_label=25, ancho_campo=13, pady=detalles_pady)
+                                          ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="remcese")
     campo_ingreso = campos.Campo(f_detalles, texto_label="Ingreso:",
-                                 ancho_label=25, ancho_campo=10, pady=detalles_pady)
+                                 ancho_label=25, ancho_campo=10, pady=detalles_pady, nombre="ingreso")
     campo_codigo_postal = campos.Campo(f_detalles, texto_label="Codigo postal:",
-                                       ancho_label=25, ancho_campo=4, pady=detalles_pady)
-    campo_convenio = campos.Campo(f_detalles, texto_label="Convenio:",
-                                  ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:",
-                                   ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    check_afiliado = checkbox.Checkbox(f_detalles, text="Afiliado",pady=detalles_pady)
-    check_admin_publica = checkbox.Checkbox(f_detalles, text="Admin. Publica",pady=detalles_pady)
-    check_exportar = checkbox.Checkbox(f_detalles, text="EXPORTAR", padx=(0,20), pady=detalles_pady*2, packanchor=tk.E)
+                                       ancho_label=25, ancho_campo=4, pady=detalles_pady, nombre="codpostal")
+    dropdown_convenio = dropdown.ListaDesplegable(f_detalles, texto_label="Convenio:",
+                                                  ancho_label=25,
+                                                  pady=detalles_pady, nombre="convenio",
+                                                  opcion_default=convenios.default_nombre(0),
+                                                  lista_opciones=convenios.lista_por_nombre()
+                                                  )
+    dropdown_categoria = dropdown.ListaDesplegable(f_detalles, texto_label="Categoria:",
+                                                  ancho_label=25,
+                                                  pady=detalles_pady, nombre="categoria",
+                                                  opcion_default=categorias.default_nombre(0),
+                                                  lista_opciones=categorias.lista_por_nombre()
+                                                  )
+    check_afiliado = checkbox.Checkbox(f_detalles, text="Afiliado",pady=detalles_pady, nombre="afiliado")
+    check_admin_publica = checkbox.Checkbox(f_detalles, text="Admin. Publica",pady=detalles_pady, nombre="adminpublica")
+    check_exportar = checkbox.Checkbox(f_detalles, text="EXPORTAR",
+                                       padx=(0,20), pady=detalles_pady*2,
+                                       packanchor=tk.E, nombre="exportar")
 
     lista_campos=[campo_nombre, campo_cuil, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
-                  campo_codigo_postal, campo_convenio, campo_categoria, check_afiliado, check_admin_publica,
+                  campo_codigo_postal, dropdown_convenio, dropdown_categoria, check_afiliado, check_admin_publica,
                   check_exportar]
 
     f_detalles_botones = tk.Frame(f_detalles)
@@ -114,7 +127,7 @@ def mostrar():
     b_exportacion.pack(side=tk.RIGHT)
 
     # BINDEOS Y COMANDOS
-    b_empleador_quitar.configure(command = lambda : empleador.quitar(lista_campos, tview_empleadores))
+    b_empleador_quitar.configure(command = lambda : empleador.quitar(lista_campos, tview_empleadores,l_exportacion))
     b_empleador_agregar.configure(command = lambda : empleador.agregar(v, tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",

@@ -1,16 +1,25 @@
 class Trabajador:
-    def __init__ (self, cuit_empleador='00000000000',cuil='00000000000', afiliado=False, rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica=False, exportar=False):
+    def __init__ (self, nombre='', cuit_empleador='00000000000',cuil='00000000000', afiliado=False, rem_cuota_sind='00000000', rem_cese_laboral='00000000', ingreso='00000000',codigo_postal='0000',convenio='00', categoria='00',administracion_publica=False, exportar=False):
+        self._nombre=nombre
         self._cuit_empleador=cuit_empleador
         self._cuil=cuil
-        self._afiliado=afiliado
         self._rem_cuota_sind=rem_cuota_sind
         self._rem_cese_laboral=rem_cese_laboral
         self._ingreso=ingreso
         self._codigo_postal=codigo_postal
         self._convenio=convenio
         self._categoria=categoria
+        self._afiliado=afiliado
         self._administracion_publica=administracion_publica
         self._exportar=exportar
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nombre=str()):
+        self._nombre=nombre
 
     @property
     def cuit_empleador (self):
@@ -27,14 +36,6 @@ class Trabajador:
     @cuil.setter
     def cuil (self, cuil=str()):
         self._cuil=cuil
-
-    @property
-    def afiliado (self):
-        return self._afiliado
-
-    @afiliado.setter
-    def afiliado (self, afiliado=True):
-        self._afiliado=afiliado
 
     @property
     def rem_cuota_sind (self):
@@ -83,6 +84,14 @@ class Trabajador:
     @categoria.setter
     def categoria (self, categoria=str()):
         self._categoria=categoria
+
+    @property
+    def afiliado (self):
+        return self._afiliado
+
+    @afiliado.setter
+    def afiliado (self, afiliado=True):
+        self._afiliado=afiliado
 
     @property
     def administracion_publica (self):

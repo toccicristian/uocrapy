@@ -8,3 +8,8 @@ def digitver(cuit_sin_dv=str()):
     if dverif == 10:
         return '9'
     return f'{dverif}'
+
+
+def escuil(cuil=str()):
+    if len(cuil)!=11 or f'{cuil[0:2]}' not in ['20','23','24','27'] or f'{cuil[-1]}' != digitver(str(cuit)[:-1]):
+        return False

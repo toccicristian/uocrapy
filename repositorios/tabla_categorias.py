@@ -8,7 +8,7 @@ def cargar():
     categorias=list()
     with open(normpath(expanduser(constantes.rutas.TABLA_CATEGORIAS)), 'r') as ar:
         for l in ar.readlines():
-            categoria=modelos.categorias.Categoria(codigo=l.split(':')[0].zfill(long_campos.CATEGORIA),nombre=l.split(':')[1])
+            categoria=modelos.categorias.Categoria(codigo=l.split(':')[0].zfill(long_campos.CATEGORIA),nombre=l.split(':')[1].rstrip())
             categorias.append(categoria)
 
     return categorias
