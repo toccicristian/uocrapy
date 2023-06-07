@@ -41,17 +41,3 @@ def selecciona_trabajador(lista_campos, tview_empleados, tview_empleadores):
     return None
 
 
-
-"""
-def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion):
-    for campo in lista_campos:
-        campo.enable()
-    if len(tview_empleadores.item(tview_empleadores.focus())['values']) == 0:
-        for campo in lista_campos:
-            campo.disable()
-        l_exportacion.config(text="")
-        return False
-
-    l_exportacion.config(text=f"Exportando para :{tview_empleadores.item(tview_empleadores.focus())['values'][0]}")
-    return None
-"""

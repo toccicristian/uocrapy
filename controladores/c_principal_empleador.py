@@ -1,5 +1,6 @@
 import vistas.v_empleadores
 import repositorios.bd_empleadores
+import controladores.c_tviews as c_tviews
 
 
 def actualiza_tview(tview):
@@ -35,13 +36,18 @@ def quitar(lista_campos, tview_empleador, l_exportacion):
 
 
 def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion):
-    for campo in lista_campos:
-        campo.enable()
+
     if len(tview_empleadores.item(tview_empleadores.focus())['values']) == 0:
         for campo in lista_campos:
             campo.disable()
         l_exportacion.config(text="")
         return False
+
+    for campo in lista_campos:
+        campo.enable()
+
+    c_tviews.actualiza_trabajadores(
+        tview_empleados, cuit_empleador=tview_empleadores.item(tview_empleadores.focus())['values'][1])
 
     l_exportacion.config(text=f"Exportando para :{tview_empleadores.item(tview_empleadores.focus())['values'][0]}")
     return None
