@@ -26,6 +26,10 @@ def selecciona_trabajador(lista_campos, tview_empleados, tview_empleadores):
         tview_empleados.item  (tview_empleados.focus()  )['values'][1],
         tview_empleadores.item(tview_empleadores.focus())['values'][1]
         )
+
+    for campo in lista_campos:
+        campo.enable()
+
     busca_campo(lista_campos,"nombre").text=trabajador.nombre
     busca_campo(lista_campos,"cuil").text=trabajador.cuil
     busca_campo(lista_campos,"remcuota").text=trabajador.rem_cuota_sind
@@ -39,6 +43,7 @@ def selecciona_trabajador(lista_campos, tview_empleados, tview_empleadores):
     busca_campo(lista_campos,"afiliado").tildada=trabajador.afiliado
     busca_campo(lista_campos,"adminpublica").tildada=trabajador.administracion_publica
     busca_campo(lista_campos,"exportar").tildada=trabajador.exportar
+
     return None
 
 
