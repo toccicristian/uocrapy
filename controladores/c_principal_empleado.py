@@ -1,6 +1,7 @@
 import repositorios.bd_trabajadores
 import repositorios.tabla_convenios
 import repositorios.tabla_categorias
+import controladores.c_tviews as c_tviews
 
 
 def busca_campo(lista_campos, nombre=str()):
@@ -40,4 +41,24 @@ def selecciona_trabajador(lista_campos, tview_empleados, tview_empleadores):
     busca_campo(lista_campos,"exportar").tildada=trabajador.exportar
     return None
 
+
+def quitar(lista_campos, tview_empleados, tview_empleadores):
+    if tview_empleados.item  (tview_empleados.focus())['values'] == '':
+        return None
+
+    for campo in lista_campos:
+        campo.disable()
+
+    repositorios.bd_trabajadores.borrar(
+        repositorios.bd_trabajadores.busca_por_cuil_trabajador_y_cuit_empleador(
+            tview_empleados.item   (tview_empleados.focus()  )['values'][1],
+            tview_empleadores.item (tview_empleadores.focus())['values'][1]
+        )
+    )
+
+    c_tviews.actualiza_trabajadores(tview_empleados,
+        tview_empleadores.item (tview_empleadores.focus())['values'][1]
+        )
+
+    return None
 

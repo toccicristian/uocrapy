@@ -133,6 +133,8 @@ def mostrar():
         lista_campos, tview_empleadores,l_exportacion))
     b_empleador_agregar.configure(command = lambda : empleador.agregar(
         v, tview_empleadores))
+    b_empleado_quitar.configure(command = lambda : empleado.quitar(
+        lista_campos, tview_empleados, tview_empleadores))
     b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
         v, tview_empleadores,lista_campos, tview_empleados))
     v.bind('<Escape>', lambda event: v.destroy())
