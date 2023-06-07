@@ -18,7 +18,8 @@ def busca_por_nombre(nombre=''):
     with open(normpath(expanduser(constantes.rutas.TABLA_CONVENIOS)),'r') as ar:
         for l in ar.readlines():
             if len(l.split(':'))>1 and l.split(':')[1].rstrip() == nombre:
-                convenio=modelos.convenios.Convenio(codigo=l.zfill(long_campos.CONVENIO), nombre=nombre)
+                convenio=modelos.convenios.Convenio(
+                    codigo=l.split(':')[0].rstrip().zfill(long_campos.CONVENIO), nombre=nombre)
                 return convenio
     convenio=modelos.convenios.Convenio(codigo='', nombre='')
     return convenio

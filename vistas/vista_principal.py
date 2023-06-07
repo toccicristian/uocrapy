@@ -138,8 +138,12 @@ def mostrar():
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
                            lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))
+    tview_empleados.bind("<<TreeviewSelect>>",
+                         lambda event: empleado.selecciona_trabajador(lista_campos, tview_empleados,
+                        tview_empleadores))
 
     empleador.actualiza_tview(tview_empleadores)
-    empleado.actualiza_tview(tview_empleados)
+    # empleado.actualiza_tview(tview_empleados)
     v.mainloop()
 
+#TODO : CUANDO NO QUEDAN EMPLEADORES SELECCIONADOS, VACIAR EL TVIEW DE TRABAJADORES

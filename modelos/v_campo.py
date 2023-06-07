@@ -21,6 +21,12 @@ class Campo:
     def text(self):
         return self._entry.get()
 
+    @text.setter
+    def text(self, text=str()):
+        self._entry.delete(0, tk.END)
+        self._entry.insert(0, text)
+        return None
+
     @property
     def nombre(self):
         return self._nombre

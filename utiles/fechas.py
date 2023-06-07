@@ -8,7 +8,6 @@ def es_dia(aaaammdd=str()):
     aaaa = int(aaaammdd[0:4])
     mes  = int(aaaammdd[4:6])
     dia  = int(aaaammdd[6:8])
-    print(f'{dia}/{mes}/{aaaa}')
     if ( ((mes%2==0 and mes>7) or (mes%2!=0 and mes<8)) and dia>31 ) or ( ((mes%2!=0 and mes>7) or (mes%2==0 and mes<7 and mes!=2)) and dia>30 ) :
         return False
     if mes == 2:

@@ -25,6 +25,14 @@ class Checkbox:
     def nombre(self):
         return self._nombre
 
+    @tildada.setter
+    def tildada(self, status=True):
+        if status:
+            self._var.set(1)
+            return None
+        self._var.set(0)
+        return None
+
     def pack (self):
         self._frame.pack(side=self._packside, anchor=self._packanchor, padx=self._padx, pady=self._pady)
         self._checkbox.pack(side=tk.LEFT)

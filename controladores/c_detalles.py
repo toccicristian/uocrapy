@@ -16,6 +16,7 @@ def busca_campo(lista_campos, nombre=str()):
 
 
 def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
+
     trabajador = modelos.trabajadores.Trabajador(nombre = busca_campo(lista_campos,nombre="nombre").text,
                                                  cuit_empleador = tview_empleadores.item(tview_empleadores.focus())['values'][1],
                                                  cuil = busca_campo(lista_campos, nombre="cuil").text,
@@ -48,16 +49,15 @@ def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
         modelos.v_mensaje.Mensaje(v, f"{errores}")
         return False
 
-
     for t in repositorios.bd_trabajadores.busca_por_cuit_de_empleador(trabajador.cuit_empleador):
         if f'{t.cuil}' == f'{trabajador.cuil}':
             repositorios.bd_trabajadores.borrar(t)
             repositorios.bd_trabajadores.crear(trabajador)
             controladores.c_trabajadores.actualiza_tview(tview_empleados)
-            modelos.v_mensaje.Mensaje(v, f"Se actualizó el trabajador {trabajador.nombre}")
+            modelos.v_mensaje.Mensaje(v, f"Se actualizó el trabajador \n{trabajador.nombre}", width="450")
             return True
 
     repositorios.bd_trabajadores.crear(trabajador)
     controladores.c_trabajadores.actualiza_tview(tview_empleados)
-    modelos.v_mensaje.Mensaje(v, f"Se creó el trabajador {trabajador.nombre}")
+    modelos.v_mensaje.Mensaje(v, f"Se creó el trabajador \n{trabajador.nombre}", width="450")
     return True

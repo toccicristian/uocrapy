@@ -25,6 +25,10 @@ class ListaDesplegable:
     def opcion_seleccionada(self):
         return self._opcion_seleccionada.get()
 
+    @opcion_seleccionada.setter
+    def opcion_seleccionada(self, opcion):
+        self._opcion_seleccionada.set(opcion)
+
     @property
     def text(self):
         return self._opcion_seleccionada.get()
