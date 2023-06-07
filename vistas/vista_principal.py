@@ -1,7 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 import modelos.v_campo as campos
+import modelos.v_checkbox as checkbox
+import modelos.v_dropdown as dropdown
 import controladores.c_principal_empleador as empleador
+import controladores.c_principal_empleado as empleado
+import controladores.c_convenio as convenios
+import controladores.c_categoria as categorias
+import controladores.c_detalles as detalles
 
 def mostrar():
     v_min_w="800"
@@ -54,37 +60,44 @@ def mostrar():
     f_detalles = tk.Frame(v)
 
     campo_nombre = campos.Campo(f_detalles, texto_label="Nombre:",
-                                ancho_label=25, ancho_campo=40, pady=detalles_pady)
+                                ancho_label=25, ancho_campo=40, pady=detalles_pady, nombre="nombre")
     campo_cuil = campos.Campo(f_detalles, texto_label="Cuil:",
-                              ancho_label=25, ancho_campo=13, pady=detalles_pady)
-    # TODO : CONVERTIR campo_afiliado A CHECKBOX. ATRIBUTO BOOLEANO.
-    campo_afiliado = campos.Campo(f_detalles, texto_label="Afiliado:",
-                                  ancho_label=25, ancho_campo=1, pady=detalles_pady)
+                              ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="cuil")
     campo_rem_cuota_sind = campos.Campo(f_detalles, texto_label="Remunerac. cuota sind.",
-                                        ancho_label=25, ancho_campo=13, pady=detalles_pady)
+                                        ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="remcuota")
     campo_rem_cese_laboral = campos.Campo(f_detalles, texto_label="Remunerac. cese laboral:",
-                                          ancho_label=25, ancho_campo=13, pady=detalles_pady)
+                                          ancho_label=25, ancho_campo=13, pady=detalles_pady, nombre="remcese")
     campo_ingreso = campos.Campo(f_detalles, texto_label="Ingreso:",
-                                 ancho_label=25, ancho_campo=10, pady=detalles_pady)
+                                 ancho_label=25, ancho_campo=10, pady=detalles_pady, nombre="ingreso")
     campo_codigo_postal = campos.Campo(f_detalles, texto_label="Codigo postal:",
-                                       ancho_label=25, ancho_campo=4, pady=detalles_pady)
-    campo_convenio = campos.Campo(f_detalles, texto_label="Convenio:",
-                                  ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    campo_categoria = campos.Campo(f_detalles, texto_label="Categoria:",
-                                   ancho_label=25, ancho_campo=2, pady=detalles_pady)
-    # TODO : CONVERTIR campo_admin_publica A CHECKBOX. ATRIBUTO BOOLEANO.
-    campo_admin_publica = campos.Campo(f_detalles, texto_label="Admin. Publica:",
-                                       ancho_label=25, ancho_campo=1, pady=detalles_pady)
-    # TODO : CREAR CHECKBOX DE EXPORTAR, Y AGREGARLO A lista_campos
+                                       ancho_label=25, ancho_campo=4, pady=detalles_pady, nombre="codpostal")
+    dropdown_convenio = dropdown.ListaDesplegable(f_detalles, texto_label="Convenio:",
+                                                  ancho_label=25,
+                                                  pady=detalles_pady, nombre="convenio",
+                                                  opcion_default=convenios.default_nombre(0),
+                                                  lista_opciones=convenios.lista_por_nombre()
+                                                  )
+    dropdown_categoria = dropdown.ListaDesplegable(f_detalles, texto_label="Categoria:",
+                                                  ancho_label=25,
+                                                  pady=detalles_pady, nombre="categoria",
+                                                  opcion_default=categorias.default_nombre(0),
+                                                  lista_opciones=categorias.lista_por_nombre()
+                                                  )
+    check_afiliado = checkbox.Checkbox(f_detalles, text="Afiliado",pady=detalles_pady, nombre="afiliado")
+    check_admin_publica = checkbox.Checkbox(f_detalles, text="Admin. Publica",pady=detalles_pady, nombre="adminpublica")
+    check_exportar = checkbox.Checkbox(f_detalles, text="EXPORTAR",
+                                       padx=(0,20), pady=detalles_pady*2,
+                                       packanchor=tk.E, nombre="exportar")
 
-    lista_campos=[campo_nombre, campo_cuil, campo_afiliado, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
-                  campo_codigo_postal, campo_convenio, campo_categoria, campo_admin_publica]
+    lista_campos=[campo_nombre, campo_cuil, campo_rem_cuota_sind, campo_rem_cese_laboral, campo_ingreso,
+                  campo_codigo_postal, dropdown_convenio, dropdown_categoria, check_afiliado, check_admin_publica,
+                  check_exportar]
 
     f_detalles_botones = tk.Frame(f_detalles)
     l_detalles_status = tk.Label(f_detalles_botones, text="", width=20, anchor=tk.W)
     b_detalles_guardar = tk.Button(f_detalles_botones, text="Guardar cambios")
     f_exportacion = tk.Frame(v)
-    l_exportacion = tk.Label(f_exportacion, text="Exportando para:", width=48, anchor=tk.W)
+    l_exportacion = tk.Label(f_exportacion, text="", width=48, anchor=tk.W)
     b_exportacion = tk.Button(f_exportacion, text="Exportar a UOCRA...")
     # PACKS
     f_personas.pack(side=tk.LEFT, padx=(20,10))
@@ -116,12 +129,23 @@ def mostrar():
     b_exportacion.pack(side=tk.RIGHT)
 
     # BINDEOS Y COMANDOS
-    b_empleador_quitar.configure(command = lambda : empleador.quitar(lista_campos, tview_empleadores))
-    b_empleador_agregar.configure(command = lambda : empleador.agregar(v, tview_empleadores))
+    b_empleador_quitar.configure(command = lambda : empleador.quitar(
+        lista_campos, tview_empleadores,l_exportacion))
+    b_empleador_agregar.configure(command = lambda : empleador.agregar(
+        v, tview_empleadores))
+    b_empleado_quitar.configure(command = lambda : empleado.quitar(
+        lista_campos, tview_empleados, tview_empleadores))
+    b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
+        v, tview_empleadores,lista_campos, tview_empleados))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
-                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados))
+                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))
+    tview_empleados.bind("<<TreeviewSelect>>",
+                         lambda event: empleado.selecciona_trabajador(lista_campos, tview_empleados,
+                        tview_empleadores))
 
     empleador.actualiza_tview(tview_empleadores)
+    # empleado.actualiza_tview(tview_empleados)
     v.mainloop()
 
+#TODO : CUANDO NO QUEDAN EMPLEADORES SELECCIONADOS, VACIAR EL TVIEW DE TRABAJADORES
