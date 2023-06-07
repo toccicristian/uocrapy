@@ -8,6 +8,7 @@ import controladores.c_principal_empleado as empleado
 import controladores.c_convenio as convenios
 import controladores.c_categoria as categorias
 import controladores.c_detalles as detalles
+import controladores.c_registros as c_registros
 
 def mostrar():
     v_min_w="800"
@@ -137,6 +138,7 @@ def mostrar():
         lista_campos, tview_empleados, tview_empleadores))
     b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
         v, tview_empleadores,lista_campos, tview_empleados))
+    b_exportacion.configure(command = lambda : c_registros.exportar(tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
                            lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))

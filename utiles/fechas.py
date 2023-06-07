@@ -25,3 +25,9 @@ def valida(fecha=str()):
     if len(fecha)!=8 or int(fecha[4:6])>12 or int(fecha[4:6])<1 or not es_dia(fecha):
         return False
     return True
+
+
+def amdtodma(aaaammdd=str()):
+    if len(aaaammdd)!=8:
+        return '00000000'
+    return f'{aaaammdd[6:8]}{aaaammdd[4:6]}{aaaammdd[0:4]}'
