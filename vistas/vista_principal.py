@@ -149,7 +149,5 @@ def mostrar():
                         tview_empleadores))
 
     empleador.actualiza_tview(tview_empleadores)
-    # empleado.actualiza_tview(tview_empleados)
     v.mainloop()
 
-#TODO : CUANDO NO QUEDAN EMPLEADORES SELECCIONADOS, VACIAR EL TVIEW DE TRABAJADORES
