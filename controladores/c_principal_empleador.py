@@ -35,9 +35,11 @@ def quitar(lista_campos, tview_empleador, l_exportacion):
     return None
 
 
-def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion):
+def selecciona_empleador(lista_campos, b_guardar, b_exportar, tview_empleados, tview_empleadores, l_exportacion):
 
     if len(tview_empleadores.item(tview_empleadores.focus())['values']) == 0:
+        b_guardar.configure(state="disabled")
+        b_exportar.configure(state="disabled")
         for campo in lista_campos:
             campo.disable()
         l_exportacion.config(text="")
@@ -48,6 +50,9 @@ def selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exp
 
     c_tviews.actualiza_trabajadores(
         tview_empleados, cuit_empleador=tview_empleadores.item(tview_empleadores.focus())['values'][1])
+
+    b_guardar.configure(state="normal")
+    b_exportar.configure(state="normal")
 
     l_exportacion.config(text=f"Exportando para :{tview_empleadores.item(tview_empleadores.focus())['values'][0]}")
     return None

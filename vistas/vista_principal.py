@@ -124,10 +124,12 @@ def mostrar():
     f_detalles_botones.pack(side=tk.TOP, pady=(40,20))
     l_detalles_status.pack(side=tk.LEFT, anchor=tk.W)
     b_detalles_guardar.pack(side=tk.LEFT, anchor=tk.W)
+    b_detalles_guardar.configure(state="disabled")
     # EXPORTACION PACK
     f_exportacion.pack(side=tk.RIGHT, anchor=tk.S, padx=(0,25), pady=(0,25))
     l_exportacion.pack(side=tk.LEFT, padx=(0,25))
     b_exportacion.pack(side=tk.RIGHT)
+    b_exportacion.configure(state="disabled")
 
     # BINDEOS Y COMANDOS
     b_empleador_quitar.configure(command = lambda : empleador.quitar(
@@ -141,7 +143,7 @@ def mostrar():
     b_exportacion.configure(command = lambda : c_registros.exportar(tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
-                           lambda event: empleador.selecciona_empleador(lista_campos, tview_empleados, tview_empleadores, l_exportacion))
+                           lambda event: empleador.selecciona_empleador(lista_campos,b_detalles_guardar, b_exportacion,tview_empleados, tview_empleadores, l_exportacion))
     tview_empleados.bind("<<TreeviewSelect>>",
                          lambda event: empleado.selecciona_trabajador(lista_campos, tview_empleados,
                         tview_empleadores))
