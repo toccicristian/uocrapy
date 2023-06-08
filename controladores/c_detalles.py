@@ -20,8 +20,8 @@ def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
     trabajador = modelos.trabajadores.Trabajador(nombre = busca_campo(lista_campos,nombre="nombre").text,
                                                  cuit_empleador = tview_empleadores.item(tview_empleadores.focus())['values'][1],
                                                  cuil = busca_campo(lista_campos, nombre="cuil").text,
-                                                 rem_cuota_sind = busca_campo(lista_campos, nombre="remcuota").text,
-                                                 rem_cese_laboral = busca_campo(lista_campos, nombre="remcese").text,
+                                                 rem_cuota_sind = f'{round(float(busca_campo(lista_campos, nombre="remcuota").text),2):.2f}',
+                                                 rem_cese_laboral = f'{round(float(busca_campo(lista_campos, nombre="remcese").text),2):.2f}',
                                                  ingreso = busca_campo(lista_campos, nombre="ingreso").text,
                                                  codigo_postal = busca_campo(lista_campos, nombre="codpostal").text,
                                                  convenio = c_convenio.codigo_de(
@@ -53,11 +53,11 @@ def guardar_cambios(v, tview_empleadores, lista_campos, tview_empleados):
         if f'{t.cuil}' == f'{trabajador.cuil}':
             repositorios.bd_trabajadores.borrar(t)
             repositorios.bd_trabajadores.crear(trabajador)
-            controladores.c_trabajadores.actualiza_tview(tview_empleados)
+            controladores.c_trabajadores.actualiza_tview(tview_empleados, tview_empleadores)
             modelos.v_mensaje.Mensaje(v, f"Se actualizó el trabajador \n{trabajador.nombre}", width="450")
             return True
 
     repositorios.bd_trabajadores.crear(trabajador)
-    controladores.c_trabajadores.actualiza_tview(tview_empleados)
+    controladores.c_trabajadores.actualiza_tview(tview_empleados, tview_empleadores)
     modelos.v_mensaje.Mensaje(v, f"Se creó el trabajador \n{trabajador.nombre}", width="450")
     return True

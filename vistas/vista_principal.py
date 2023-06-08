@@ -140,7 +140,7 @@ def mostrar():
         lista_campos, tview_empleados, tview_empleadores))
     b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
         v, tview_empleadores,lista_campos, tview_empleados))
-    b_exportacion.configure(command = lambda : c_registros.exportar(tview_empleadores))
+    b_exportacion.configure(command = lambda : c_registros.exportar(v, tview_empleadores))
     v.bind('<Escape>', lambda event: v.destroy())
     tview_empleadores.bind("<<TreeviewSelect>>",
                            lambda event: empleador.selecciona_empleador(lista_campos,b_detalles_guardar, b_exportacion,tview_empleados, tview_empleadores, l_exportacion))
