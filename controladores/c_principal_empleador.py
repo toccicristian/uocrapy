@@ -11,11 +11,22 @@ def actualiza_tview(tview):
         i+=1
 
 
-def agregar(toplevel, tview_empleador):
-    vistas.v_empleadores.mostrar(toplevel, tview_empleador)
+def actualiza_tview_empleados(tview_empleados, tview_empleadores):
+    tview_empleados.delete(*tview_empleados.get_children())
+    if tview_empleadores.item(tview_empleadores.focus())['values'] == '':
+        return False
+    i=0
+    for empleado in repositorios.bd_trabajadores.busca_por_cuit_de_empleador(
+        tview_empleadores.item(tview_empleadores.focus())['values'][1]):
+        tview_empleados.insert(parent="", index=i, iid=i, text="", values=(empleado.nombre, empleado.cuit))
+    return True
 
 
-def quitar(lista_campos, tview_empleador, l_exportacion):
+def agregar(toplevel, tview_empleador, tview_empleados):
+    vistas.v_empleadores.mostrar(toplevel, tview_empleador, tview_empleados)
+
+
+def quitar(lista_campos, tview_empleador, tview_empleados, l_exportacion):
     l_exportacion.config(text="")
     if len(tview_empleador.item(tview_empleador.focus())['values']) == 0:
         for campo in lista_campos:
@@ -32,6 +43,8 @@ def quitar(lista_campos, tview_empleador, l_exportacion):
     if len(tview_empleador.selection()) == 0:
         for campo in lista_campos:
             campo.disable()
+
+    actualiza_tview_empleados(tview_empleados, tview_empleador)
     return None
 
 

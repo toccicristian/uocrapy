@@ -2,7 +2,7 @@ import tkinter as tk
 import modelos.v_campo as campos
 import controladores.c_empleadores
 
-def mostrar(toplevel, tview_empleador, width="600", height="150"):
+def mostrar(toplevel, tview_empleador, tview_empleados, width="600", height="150"):
     v=tk.Toplevel(toplevel)
     v.title("Agregar empleador")
     v.geometry(f"{width}x{height}")
@@ -19,10 +19,10 @@ def mostrar(toplevel, tview_empleador, width="600", height="150"):
     v.bind("<Escape>", lambda event: v.destroy())
 
     b_aceptar.bind("<Return>", lambda event: controladores.c_empleadores.agregar(
-                            v, tview_empleador, campo_nombre.text, campo_cuit.text))
+                            v, tview_empleador, tview_empleados ,campo_nombre.text, campo_cuit.text))
 
     campo_cuit.bind("<Return>", lambda event: controladores.c_empleadores.agregar(
-                            v, tview_empleador, campo_nombre.text, campo_cuit.text))
+                            v, tview_empleador, tview_empleados, campo_nombre.text, campo_cuit.text))
 
     f_campos.pack(side=tk.TOP, padx=(10,10), pady=(10,0))
     campo_nombre.pack()
