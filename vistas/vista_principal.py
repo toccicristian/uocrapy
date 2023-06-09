@@ -133,9 +133,9 @@ def mostrar():
 
     # BINDEOS Y COMANDOS
     b_empleador_quitar.configure(command = lambda : empleador.quitar(
-        lista_campos, tview_empleadores,l_exportacion))
+        lista_campos, tview_empleadores, tview_empleados, l_exportacion))
     b_empleador_agregar.configure(command = lambda : empleador.agregar(
-        v, tview_empleadores))
+        v, tview_empleadores, tview_empleados))
     b_empleado_quitar.configure(command = lambda : empleado.quitar(
         lista_campos, tview_empleados, tview_empleadores))
     b_detalles_guardar.configure(command = lambda : detalles.guardar_cambios(
