@@ -1,12 +1,12 @@
 class Convenio:
     def __init__ (self, codigo=str(), nombre=str()):
-        self._codigo=codigo
-        self._nombre=nombre
+        self.__codigo=codigo
+        self.__nombre=nombre
 
     @property
     def codigo (self):
-        return self._codigo
+        return self.__codigo
 
     @property
     def nombre (self):
-        return self._nombre
+        return self.__nombre
