@@ -9,6 +9,7 @@ def actualiza_tview(tview):
     tview.delete(*tview.get_children())
     i=0
     for empleador in repositorios.bd_empleadores.leer():
+        print(f'****{empleador.nombre}')
         tview.insert(parent="", index=i, iid=i, text="", values=(empleador.nombre, empleador.cuit))
         i+=1
     return None

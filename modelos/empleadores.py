@@ -1,23 +1,23 @@
 class Empleador:
     def __init__ (self, cuit="00000000000",nombre=""):
-        self._cuit=cuit
-        self._nombre=nombre
+        self.__cuit=cuit
+        self.__nombre=nombre
 
     @property
     def cuit (self):
-        return self._cuit
+        return self._Empleador__cuit
 
     @cuit.setter
     def cuit (self, cuit):
-        self._cuit=cuit
+        self._Empleador__cuit=cuit
 
     @property
     def nombre (self):
-        return self._nombre
+        return self._Empleador__nombre
 
     @nombre.setter
     def nombre (self, nombre):
-        self._nombre = nombre
+        self._Empleador__nombre = nombre
 
     def __str__(self):
-        return f"{self._cuit};{self._nombre}"
+        return f"{self.__cuit};{self.__nombre}"

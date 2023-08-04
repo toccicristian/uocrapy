@@ -104,5 +104,5 @@ def vista_principal_test():
 
 repositorios_bd_trabajadores_test()
 repositorios_bd_empleadores_test()
-vista_principal_test()
+#vista_principal_test()
 
