@@ -5,8 +5,8 @@ class Convenio:
 
     @property
     def codigo (self):
-        return self.__codigo
+        return self._Convenio__codigo
 
     @property
     def nombre (self):
-        return self.__nombre
+        return self._Convenio__nombre

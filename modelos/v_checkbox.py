@@ -17,28 +17,28 @@ class Checkbox:
 
     @property
     def tildada(self):
-        if self.__var.get() == 1:
+        if self._Checkbox__var.get() == 1:
             return True
         return False
 
     @property
     def nombre(self):
-        return self.__nombre
+        return self._Checkbox__nombre
 
     @tildada.setter
     def tildada(self, status=True):
         if status:
-            self.__var.set(1)
+            self._Checkbox__var.set(1)
             return None
-        self.__var.set(0)
+        self._Checkbox__var.set(0)
         return None
 
     def pack (self):
-        self.__frame.pack(side=self.__packside, anchor=self.__packanchor, padx=self.__padx, pady=self.__pady)
-        self.__checkbox.pack(side=tk.LEFT)
+        self._Checkbox__frame.pack(side=self._Checkbox__packside, anchor=self._Checkbox__packanchor, padx=self._Checkbox__padx, pady=self._Checkbox__pady)
+        self._Checkbox__checkbox.pack(side=tk.LEFT)
 
     def disable(self):
-        self.__checkbox.config(state=tk.DISABLED)
+        self._Checkbox__checkbox.config(state=tk.DISABLED)
 
     def enable(self):
-        self.__checkbox.config(state=tk.NORMAL)
+        self._Checkbox__checkbox.config(state=tk.NORMAL)

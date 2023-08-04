@@ -19,31 +19,31 @@ class Campo:
 
     @property
     def text(self):
-        return self.__entry.get()
+        return self._Campo__entry.get()
 
     @text.setter
     def text(self, text=str()):
-        self.__entry.delete(0, tk.END)
-        self.__entry.insert(0, text)
+        self._Campo__entry.delete(0, tk.END)
+        self._Campo__entry.insert(0, text)
         return None
 
     @property
     def nombre(self):
-        return self.__nombre
+        return self._Campo__nombre
 
     def pack(self):
-        self.__frame.pack(side=self.__packside, anchor=self.__packanchor, padx=self.__padx, pady=self.__pady)
-        self.__label.pack(side=tk.LEFT)
-        self.__entry.pack(side=tk.LEFT)
+        self._Campo__frame.pack(side=self.__packside, anchor=self.__packanchor, padx=self.__padx, pady=self.__pady)
+        self._Campo__label.pack(side=tk.LEFT)
+        self._Campo__entry.pack(side=tk.LEFT)
 
     def focus_set(self):
-        self.__entry.focus_set()
+        self._Campo__entry.focus_set()
 
     def bind(self, secuencia, funcion):
-        self.__entry.bind(secuencia, funcion)
+        self._Campo__entry.bind(secuencia, funcion)
 
     def disable(self):
-        self.__entry.configure(state=tk.DISABLED)
+        self._Campo__entry.configure(state=tk.DISABLED)
 
     def enable(self):
-        self.__entry.configure(state=tk.NORMAL)
+        self._Campo__entry.configure(state=tk.NORMAL)

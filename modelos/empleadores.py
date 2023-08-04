@@ -5,19 +5,19 @@ class Empleador:
 
     @property
     def cuit (self):
-        return self.__cuit
+        return self._Empleador__cuit
 
     @cuit.setter
     def cuit (self, cuit):
-        self.__cuit=cuit
+        self._Empleador__cuit=cuit
 
     @property
     def nombre (self):
-        return self.__nombre
+        return self._Empleador__nombre
 
     @nombre.setter
     def nombre (self, nombre):
-        self.__nombre = nombre
+        self._Empleador__nombre = nombre
 
     def __str__(self):
         return f"{self.__cuit};{self.__nombre}"

@@ -23,27 +23,27 @@ class ListaDesplegable:
 
     @property
     def opcion_seleccionada(self):
-        return self.__opcion_seleccionada.get()
+        return self._ListaDesplegable__opcion_seleccionada.get()
 
     @opcion_seleccionada.setter
     def opcion_seleccionada(self, opcion):
-        self.__opcion_seleccionada.set(opcion)
+        self._ListaDesplegable__opcion_seleccionada.set(opcion)
 
     @property
     def text(self):
-        return self.__opcion_seleccionada.get()
+        return self._ListaDesplegable__opcion_seleccionada.get()
 
     @property
     def nombre(self):
-        return self.__nombre
+        return self._ListaDesplegable__nombre
 
     def pack(self):
-        self.__frame.pack(side=self.__packside, anchor=self.__packanchor, padx=self.__padx, pady=self.__pady)
-        self.__label.pack(side=tk.LEFT)
-        self.__dropdown.pack(side=tk.LEFT)
+        self._ListaDesplegable__frame.pack(side=self._ListaDesplegable__packside, anchor=self._ListaDesplegable__packanchor, padx=self._ListaDesplegable__padx, pady=self._ListaDesplegable__pady)
+        self._ListaDesplegable__label.pack(side=tk.LEFT)
+        self._ListaDesplegable__dropdown.pack(side=tk.LEFT)
 
     def disable(self):
-        self.__dropdown.configure(state="disabled")
+        self._ListaDesplegable__dropdown.configure(state="disabled")
 
     def enable(self):
-        self.__dropdown.configure(state="normal")
+        self._ListaDesplegable__dropdown.configure(state="normal")

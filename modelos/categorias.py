@@ -5,8 +5,8 @@ class Categoria:
 
     @property
     def codigo (self):
-        return self.__codigo
+        return self._Categoria__codigo
 
     @property
     def nombre (self):
-        return self.__nombre
+        return self._Categoria__nombre
